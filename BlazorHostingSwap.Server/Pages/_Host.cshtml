@@ -1,0 +1,35 @@
+﻿@page "/"
+@namespace BlazorHostingSwap.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    string csb = Request.Cookies["csb"];
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RazorComponentsWeb-CSharp</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="preload" as="script" href="_framework/wasm/mono.wasm" onload="preloaded()"/>
+    <link href="css/site.css" rel="stylesheet" />
+</head>
+<body>
+    @if (csb == "ready")
+    {
+        <div>Client Side Blazor  <button onclick="reset()">Reset</button></div>
+        <app></app>
+        <script src="~/WASMStart.js"></script>
+    }
+    else
+    {
+        <div>Server Side Blazor</div>
+        <app></app>
+        <script src="_framework/blazor.server.js"></script>
+    }
+
+    <script src="~/IsClientSide.js"></script>
+</body>
+</html>
